@@ -77,7 +77,7 @@ str(FinalData)
 # 2. Extract only the measurements on the mean and standard deviation for each measurement. 
 Extract <- grep("mean|std|subject|activity", names(FinalData))
 Extract
-ExtractCols <- finalData[Extract]
+ExtractCols <- FinalData[Extract]
 #### 3.Uses descriptive activity names to name the activities in the data set, use the dplyr:join
 Activitynames <- join(ExtractCols, activityLabels, by = "activityId", match = "first")
 head(Activitynames)
@@ -94,6 +94,7 @@ names(Activitynames) <- gsub("^(f)","freq",names(Activitynames))
 
 
 str(Activitynames)
+Activitynames <- Activitynames[,1:81]
 Activitynames$activityId <- factor(Activitynames$activityId, levels = activityLabels[,1], labels = activityLabels[,2])
 Activitynames$subjectId <- as.factor(Activitynames$subjectId)
 Activitynames.melted <- melt(Activitynames, id = c("subjectId", "activityId"))
