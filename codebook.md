@@ -134,6 +134,7 @@ names(Activitynames) <- gsub("^(f)","freq",names(Activitynames))
 
 
 str(Activitynames)
+Activitynames <- Activitynames[,1:81]
 Activitynames$activityId <- factor(Activitynames$activityId, levels = activityLabels[,1], labels = activityLabels[,2])
 Activitynames$subjectId <- as.factor(Activitynames$subjectId)
 Activitynames.melted <- melt(Activitynames, id = c("subjectId", "activityId"))
@@ -142,3 +143,4 @@ head(Activitynames.mean, 20)
 dim(Activitynames.mean)
 
 write.table(Activitynames.mean, file = "tidyData.txt")
+
